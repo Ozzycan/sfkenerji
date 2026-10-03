@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Filament\Resources\SiteSettings\Tables;
+
+use Filament\Actions\EditAction;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
+
+class SiteSettingsTable
+{
+    public static function configure(Table $table): Table
+    {
+        return $table
+            ->columns([
+                TextColumn::make('phone')
+                    ->label('Telefon Numarası')
+                    ->weight('semibold'),
+                TextColumn::make('email')
+                    ->label('E-posta'),
+                TextColumn::make('vision_title')
+                    ->label('Vizyon Başlığı'),
+                TextColumn::make('updated_at')
+                    ->label('Son Güncelleme')
+                    ->dateTime('d.m.Y H:i')
+            ])
+            ->filters([
+                //
+            ])
+            ->recordActions([
+                EditAction::make()
+                    ->url(fn ($record) => \App\Filament\Resources\SiteSettings\SiteSettingResource::getUrl('edit', ['record' => $record])),
+            ]);
+    }
+}
